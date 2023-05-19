@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Портфолио разработчика</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-<h2>Messages</h2>
-<form method="post" action="/add_message">
-    <input type="text" name="text">
-    <input type="text" name="tag">
-    <button type="submit">Add post</button>
-</form>
+    <h1>Портфолио разработчика</h1>
 
-<h3>Messages feed</h3>
-{% for message in messages %}
-<div>{{ message.text }}
-    {% for tag in message.tags %}
-        <b>#{{ tag.text }}</b>
-    {% endfor %}
-</div>
-{% endfor %}
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Ссылка на репозиторий</th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.title }}</td>
+            <td><a href="{{ project.link }}">{{ project.link }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
 
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Название">
+        <input type="text" name="link" placeholder="Ссылка на репозиторий">
+        <input type="submit" value="Добавить">
+    </form>
 </body>
 </html>
